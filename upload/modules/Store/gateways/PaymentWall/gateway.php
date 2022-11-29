@@ -33,7 +33,7 @@ class PaymentWall_Gateway extends GatewayBase {
                 substr(md5(mt_rand()), 0, 7),
                 $order->getAmount()->getTotal(),
                 $currency,
-                'Order # ' . $order->data()->id
+                'Order #' . $order->data()->id
             )
         ];
 
