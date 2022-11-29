@@ -46,7 +46,6 @@ class PaymentWall_Gateway extends GatewayBase {
                 'project_name' => Output::getClean(SITE_NAME),
                 'merchant_order_id' => $order->data()->id,
                 'order_id' => $order->data()->id,
-                'evaluation' => true
             ]
         );
 
