@@ -35,5 +35,6 @@ if (Input::exists()) {
 
 $smarty->assign([
     'SETTINGS_TEMPLATE' => ROOT_PATH . '/modules/Store/gateways/PaymentWall/gateway_settings/settings.tpl',
-    'ENABLE_VALUE' => ((isset($enabled)) ? $enabled : $gateway->isEnabled())
+    'ENABLE_VALUE' => ((isset($enabled)) ? $enabled : $gateway->isEnabled()),
+    'PINGBACK_URL' => rtrim(URL::getSelfURL(), '/') . URL::build('/store/listener', 'gateway=PaymentWall')
 ]);
