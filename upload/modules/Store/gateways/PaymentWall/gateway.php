@@ -24,6 +24,7 @@ class PaymentWall_Gateway extends GatewayBase {
     {
         // Load api
         $this->getApiContext();
+        $widget_code = StoreConfig::get('paymentwall/widget_id') ?? 'p1';
 
         $currency = $order->getAmount()->getCurrency();
         $successRedirect = rtrim(Util::getSelfURL(), '/') . URL::build('/store/process/', 'gateway=PaymentWall&do=success');
@@ -33,19 +34,20 @@ class PaymentWall_Gateway extends GatewayBase {
                 substr(md5(mt_rand()), 0, 7),
                 $order->getAmount()->getTotal(),
                 $currency,
-                'Order #' . $order->data()->id
+                'Order # ' . $order->data()->id
             )
         ];
 
         $widget = new Paymentwall_Widget(
             $order->customer()->data()->id,
-            'p1',
+            $widget_code,
             $products,
             [
                 'success_url' => $successRedirect,
                 'project_name' => Output::getClean(SITE_NAME),
                 'merchant_order_id' => $order->data()->id,
                 'order_id' => $order->data()->id,
+                'evaluation' => true
             ]
         );
 
@@ -85,7 +87,7 @@ class PaymentWall_Gateway extends GatewayBase {
         $pingback = new Paymentwall_Pingback($_GET, $_SERVER['REMOTE_ADDR']);
         $order = $_GET['order_id'];
 
-        if ($pingback->validate(true)) { // Somehow always fails
+        if ($pingback->validate(true)) {
             if ($pingback->isDeliverable()) {
                 $payment = new Payment($order, 'payment_id');
                 $payment->handlePaymentEvent('COMPLETED', [

@@ -5,13 +5,6 @@
             The values of these fields are hidden for security reasons.<br />If you are updating these settings, please enter both the client ID and the client secret together.
         </div>
     </div>
-    <br />
-    <div class="card shadow border-left-warning">
-        <div class="card-body">
-            <h5><i class="icon fa fa-info-circle"></i> Important</h5>
-            Make sure you set the PingBack URL to <code>{$PINGBACK_URL}</code> in the PaymentWall configuration!
-        </div>
-    </div>
 
     <br />
 
@@ -22,6 +15,10 @@
     <div class="form-group">
         <label for="inputSecretKey">Secret Key</label>
         <input class="form-control" type="text" id="inputSecretKey" name="secret_key" placeholder="The values of these fields are hidden for security reasons.">
+    </div>
+    <div class="form-group">
+        <label for="inputWidgetId">Widget code</label>
+        <input class="form-control" type="text" id="inputWidgetId" name="widget_id" placeholder="The values of these fields are hidden for security reasons.">
     </div>
 
     <div class="form-group custom-control custom-switch">

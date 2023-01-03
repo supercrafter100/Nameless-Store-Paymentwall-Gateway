@@ -16,7 +16,7 @@ if (Input::exists()) {
             $settings = [];
             $settings['paymentwall/public_key'] = $_POST['project_key'];
             $settings['paymentwall/private_key'] = $_POST['secret_key'];
-
+            $settings['paymentwall/widget_id'] = $_POST['widget_id'] ?? 'p1';
             StoreConfig::set($settings);
         }
 
@@ -35,6 +35,5 @@ if (Input::exists()) {
 
 $smarty->assign([
     'SETTINGS_TEMPLATE' => ROOT_PATH . '/modules/Store/gateways/PaymentWall/gateway_settings/settings.tpl',
-    'ENABLE_VALUE' => ((isset($enabled)) ? $enabled : $gateway->isEnabled()),
-    'PINGBACK_URL' => rtrim(URL::getSelfURL(), '/') . URL::build('/store/listener', 'gateway=PaymentWall')
+    'ENABLE_VALUE' => ((isset($enabled)) ? $enabled : $gateway->isEnabled())
 ]);
