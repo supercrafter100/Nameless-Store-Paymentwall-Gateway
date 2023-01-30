@@ -9,7 +9,7 @@
     <div class="card shadow border-left-warning">
         <div class="card-body">
             <h5><i class="icon fa fa-info-circle"></i> Important</h5>
-            Make sure you set the PingBack URL to <code>{$PINGBACK_URL}</code> in the PaymentWall configuration!
+            Make sure you set the PingBack URL to <code>{$PINGBACK_URL}</code> in the PaymentWall configuration! <br>Also make sure there is a custom pingback parameter named <code>order_id</code> with value <code>OWN</code>
         </div>
     </div>
 
