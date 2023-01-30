@@ -100,9 +100,8 @@ class PaymentWall_Gateway extends GatewayBase {
                     'gateway_id' => $this->getId(),
                     'payment_id' => $order,
                     'transaction' => $order,
-                    'amount' => $pingback->getProduct()->getAmount(),
+                    'amount_cents' => Store::toCents($pingback->getProduct()->getAmount()),
                     'currency' => $pingback->getProduct()->getCurrencyCode(),
-                    'fee' => 0
                 ]);
             }
 
