@@ -10,9 +10,15 @@
 class PaymentWall_Gateway extends GatewayBase {
     public function __construct()
     {
+        require_once(ROOT_PATH . '/modules/Store/gateways/PaymentWall/lib/paymentwall-php/lib/paymentwall.php');
+
         $name = 'PaymentWall';
         $settings = ROOT_PATH . '/modules/Store/gateways/PaymentWall/gateway_settings/settings.php';
-        parent::__construct($name, $settings);
+        $author = '<a href="https://github.com/supercrafter100/" target="_blank" rel="nofollow noopener">Supercrafter100</a>';
+        $gateway_version = '1.5.2';
+        $store_version = '1.5.2';
+
+        parent::__construct($name, $author, $gateway_version, $store_version, $settings);
     }
 
     public function onCheckoutPageLoad(TemplateBase $template, Customer $customer): void
@@ -32,7 +38,7 @@ class PaymentWall_Gateway extends GatewayBase {
         $products = [
             new Paymentwall_Product(
                 substr(md5(mt_rand()), 0, 7),
-                $order->getAmount()->getTotal(),
+                Store::fromCents($order->getAmount()->getTotalCents()),
                 $currency,
                 'Order #' . $order->data()->id
             )
@@ -60,7 +66,6 @@ class PaymentWall_Gateway extends GatewayBase {
         $private_key = StoreConfig::get('paymentwall/private_key');
 
         if ($public_key && $private_key) {
-            require_once(ROOT_PATH . '/modules/Store/gateways/PaymentWall/lib/paymentwall-php/lib/paymentwall.php');
             Paymentwall_Config::getInstance()->set([
                 'api_type' => Paymentwall_Config::API_GOODS,
                 'public_key' => $public_key,
