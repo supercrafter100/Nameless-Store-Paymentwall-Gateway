@@ -33,7 +33,7 @@ class PaymentWall_Gateway extends GatewayBase {
         $widget_code = StoreConfig::get('paymentwall/widget_id') ?? 'p1';
 
         $currency = $order->getAmount()->getCurrency();
-        $successRedirect = rtrim(Util::getSelfURL(), '/') . URL::build('/store/process/', 'gateway=PaymentWall&do=success');
+        $successRedirect = rtrim(URL::getSelfURL(), '/') . URL::build('/store/process/', 'gateway=PaymentWall&do=success');
 
         $products = [
             new Paymentwall_Product(
